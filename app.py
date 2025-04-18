@@ -7,12 +7,10 @@ from feature import FeatureExtraction
 warnings.filterwarnings('ignore')
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'  # Change to a secure random key
+app.secret_key = 'maxchar14'
 
-# In-memory user store (replace with DB in real app)
 users = {'ian@testuser.com': 'testpass'}
 
-# Load ML model
 with open("pickle/model.pkl", "rb") as file:
     gbc = pickle.load(file)
 
