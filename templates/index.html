@@ -53,7 +53,8 @@
         </ul>
 
         <div class="col-md-3 text-end">
-          <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+            <span class="me-2">Hi, {{ user }}</span>
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
         </div>
         
       </header>
@@ -82,9 +83,6 @@
           </div>
     
           <div class="col-md" id="form2">
-            <!-- <br>
-            <h6 class="right"><a href={{ url }} target="_blank">{{ url }}</a></h6>
-            <br> -->
             <h3 id="prediction"></h3>
             <button class="button2" id="button2" role="button" onclick="window.open('{{url}}')" target="_blank">Still want to Continue</button>
             <button class="button1" id="button1" role="button" onclick="window.open('{{url}}')" target="_blank">Continue</button>
@@ -116,11 +114,11 @@
         num = 100 - num;
       }
       let txtx = num.toString();
-      if (x <= 1 && x >= 0.5) {
+      if (x <= 1 && x >= 0.80) {
         var label = "Website is " + txtx + "% safe to use...";
         document.getElementById("prediction").innerHTML = label;
         document.getElementById("button1").style.display = "block";
-      } else if (0 <= x && x < 0.5) {
+      } else if (0 <= x && x < 0.80) {
         var label = "Website is " + txtx + "% unsafe to use...";
         document.getElementById("prediction").innerHTML = label;
         document.getElementById("button2").style.display = "block";
