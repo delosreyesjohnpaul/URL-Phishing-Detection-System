@@ -65,6 +65,53 @@ def validate_login(email, password):
     combined_input = password + hashed_secret2.decode('utf-8')
     return bcrypt.checkpw(combined_input.encode('utf-8'), stored_hashed_password)
 
+# ---------------- URL EXPLANATION LOGIC ---------------- #
+
+def generate_reason(features):
+    phishing_reasons = []
+    safe_reasons = []
+
+    if features[0] == 1:
+        phishing_reasons.append("Uses an IP address instead of a domain.")
+    else:
+        safe_reasons.append("Uses a standard domain name.")
+
+    if features[1] == 1:
+        phishing_reasons.append("URL length is unusually long.")
+    else:
+        safe_reasons.append("URL length is normal.")
+
+    if features[5] == 1:
+        phishing_reasons.append("Contains '@' symbol, often used to mislead users.")
+    else:
+        safe_reasons.append("No suspicious '@' symbol found.")
+
+    if features[7] == 1:
+        phishing_reasons.append("Has multiple redirects using '//'.")
+    else:
+        safe_reasons.append("No excessive redirection detected.")
+
+    if features[13] == 1:
+        phishing_reasons.append("Website has invalid or missing SSL certificate.")
+    else:
+        safe_reasons.append("Website uses a valid SSL certificate (HTTPS).")
+
+    if features[21] == 1:
+        phishing_reasons.append("URL is listed in known phishing reports.")
+    else:
+        safe_reasons.append("URL is not listed in phishing reports.")
+
+    if phishing_reasons:
+        return {
+            "summary": "The site shows signs of being potentially unsafe.",
+            "reasons": phishing_reasons
+        }
+    else:
+        return {
+            "summary": "No suspicious patterns detected. Site appears safe.",
+            "reasons": safe_reasons
+        }
+
 # ---------------- ROUTES ---------------- #
 
 @app.route('/', methods=['GET', 'POST'])
@@ -76,12 +123,14 @@ def home():
         url = request.form.get('url')
         if url:
             obj = FeatureExtraction(url)
-            x = np.array(obj.getFeaturesList()).reshape(1, 30)
+            features = obj.getFeaturesList()
+            x = np.array(features).reshape(1, 30)
             y_pred = gbc.predict(x)[0]
             y_pro_phishing = gbc.predict_proba(x)[0, 0]
             y_pro_non_phishing = gbc.predict_proba(x)[0, 1]
+            reason_info = generate_reason(features)
 
-            return render_template('index.html', user=session['user'], xx=round(y_pro_non_phishing, 2), url=url)
+            return render_template('index.html', user=session['user'], xx=round(y_pro_non_phishing, 2), url=url, reason_summary=reason_info['summary'], reason_list=reason_info['reasons'])
 
     return render_template('index.html', user=session['user'], xx=-1)
 
