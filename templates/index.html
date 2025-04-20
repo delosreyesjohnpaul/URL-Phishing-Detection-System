@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
+<<<<<<< HEAD
       content="This website is develop for identify the safety of url."
+=======
+      content="This website is developed to identify the safety of URLs."
+>>>>>>> ian_push
     />
     <meta
       name="keywords"
@@ -14,6 +18,10 @@
     />
     <meta name="author" content="VAIBHAV BICHAVE" />
 
+<<<<<<< HEAD
+=======
+    <!-- BootStrap -->
+>>>>>>> ian_push
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -48,11 +56,20 @@
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
           <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
           <li><a href="#" class="nav-link px-2">Features</a></li>
+<<<<<<< HEAD
           <li><a href="#" class="nav-link px-2">Documentaion</a></li>
         </ul>
 
         <div class="col-md-3 text-end">
           <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+=======
+          <li><a href="#" class="nav-link px-2">Documentation</a></li>
+        </ul>
+
+        <div class="col-md-3 text-end">
+            <span class="me-2">Hi, {{ user }}</span>
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+>>>>>>> ian_push
         </div>
         
       </header>
@@ -82,6 +99,19 @@
     
           <div class="col-md" id="form2">
             <h3 id="prediction"></h3>
+<<<<<<< HEAD
+=======
+            {% if reason_list %}
+              <div class="alert alert-info mt-3">
+                <strong>Explanation:</strong> {{ reason_summary }}
+                <ul class="mt-2">
+                  {% for r in reason_list %}
+                    <li>{{ r }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+>>>>>>> ian_push
             <button class="button2" id="button2" role="button" onclick="window.open('{{url}}')" target="_blank">Still want to Continue</button>
             <button class="button1" id="button1" role="button" onclick="window.open('{{url}}')" target="_blank">Continue</button>
           </div>
@@ -112,15 +142,27 @@
         num = 100 - num;
       }
       let txtx = num.toString();
+<<<<<<< HEAD
       if (x <= 1 && x >= 0.5) {
         var label = "Website is " + txtx + "% safe to use...";
         document.getElementById("prediction").innerHTML = label;
         document.getElementById("button1").style.display = "block";
       } else if (0 <= x && x < 0.5) {
+=======
+      if (x <= 1 && x >= 0.80) {
+        var label = "Website is " + txtx + "% safe to use...";
+        document.getElementById("prediction").innerHTML = label;
+        document.getElementById("button1").style.display = "block";
+      } else if (0 <= x && x < 0.80) {
+>>>>>>> ian_push
         var label = "Website is " + txtx + "% unsafe to use...";
         document.getElementById("prediction").innerHTML = label;
         document.getElementById("button2").style.display = "block";
       }
     </script>
   </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> ian_push

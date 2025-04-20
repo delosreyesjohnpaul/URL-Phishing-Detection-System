@@ -1,10 +1,11 @@
-beautifulsoup4
-Flask
-googlesearch_python
-numpy
-pandas
-python_dateutil
-requests
-scikit_learn
-whois
-gunicorn
+pip install scikit_learn==1.5.1
+pip install beautifulsoup4
+pip install Flask
+pip install googlesearch_python
+pip install numpy
+pip install pandas
+pip install python_dateutil
+pip install requests
+pip install whois
+pip install gunicorn
+pip install bcrypt
